@@ -1,11 +1,873 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fahri Fadhil Muhammad — Cyber Security</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0F1419;
+      --panel: #161D25;
+      --panel-2: #1C242E;
+      --line: #2A3441;
+      --text: #E8ECEF;
+      --muted: #7E8A99;
+      --accent: #5EEAD4;
+      --accent-dim: #2D7A6E;
+      --amber: #F0B429;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    *:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(15, 20, 25, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-brand {
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-brand .dot {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* ===== HERO / TERMINAL ===== */
+    .hero {
+      padding: 64px 0 48px;
+    }
+
+    .terminal {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px -20px rgba(94, 234, 212, 0.08);
+    }
+
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: var(--panel-2);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--line);
+    }
+
+    .terminal-bar span:last-child {
+      margin-left: 8px;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .terminal-body {
+      padding: 24px 24px 28px;
+      font-family: var(--mono);
+      font-size: 0.9rem;
+    }
+
+    .terminal-line {
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .terminal-line .prompt {
+      color: var(--accent);
+    }
+
+    .terminal-output {
+      margin: 14px 0 20px;
+    }
+
+    .terminal-output h1 {
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .terminal-output .role {
+      color: var(--accent);
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .terminal-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .terminal-meta a {
+      color: var(--muted);
+    }
+
+    .terminal-meta a:hover {
+      color: var(--accent);
+    }
+
+    .terminal-meta span::before {
+      content: '';
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1em;
+      background: var(--accent);
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .lede {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 1.02rem;
+      max-width: 640px;
+    }
+
+    /* ===== STATS PANEL ===== */
+    .stats {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .stat {
+      background: var(--panel);
+      padding: 20px 16px;
+      text-align: left;
+    }
+
+    .stat-value {
+      font-family: var(--mono);
+      font-size: clamp(1.3rem, 4vw, 1.8rem);
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-value .unit {
+      color: var(--amber);
+      font-size: 0.65em;
+    }
+
+    .stat-label {
+      margin-top: 6px;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    @media (max-width: 700px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      padding: 56px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .section-title {
+      font-family: var(--mono);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .section-status {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      border: 1px solid var(--accent-dim);
+      border-radius: 4px;
+      padding: 4px 10px;
+      background: rgba(94, 234, 212, 0.06);
+    }
+
+    .section-status.amber {
+      color: var(--amber);
+      border-color: #6b5320;
+      background: rgba(240, 180, 41, 0.06);
+    }
+
+    /* ===== EXPERIENCE ===== */
+    .entry {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 24px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .entry:last-child {
+      border-bottom: none;
+    }
+
+    .entry-date {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .entry-date .present {
+      color: var(--accent);
+    }
+
+    .entry-title {
+      font-weight: 600;
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .entry-org {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .entry ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .entry li {
+      font-size: 0.92rem;
+      color: var(--text);
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .entry li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-family: var(--mono);
+    }
+
+    @media (max-width: 640px) {
+      .entry {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+    }
+
+    /* ===== PROJECTS ===== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .project-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent-dim);
+      transform: translateY(-2px);
+    }
+
+    .project-card h3 {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .project-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .project-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      background: rgba(94, 234, 212, 0.07);
+      border: 1px solid var(--accent-dim);
+      border-radius: 4px;
+      padding: 2px 7px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 640px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== SKILLS ===== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px 40px;
+    }
+
+    .skill-group h3 {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .skill-row {
+      margin-bottom: 12px;
+    }
+
+    .skill-row-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      margin-bottom: 5px;
+    }
+
+    .skill-row-top .tools {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.74rem;
+    }
+
+    .skill-bar {
+      height: 6px;
+      background: var(--panel-2);
+      border-radius: 3px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+      border-radius: 3px;
+    }
+
+    @media (max-width: 640px) {
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== EDUCATION ===== */
+    .edu-item {
+      display: flex;
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .edu-item:last-child {
+      border-bottom: none;
+    }
+
+    .edu-marker {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      background: rgba(94, 234, 212, 0.07);
+      border: 1px solid var(--accent-dim);
+      border-radius: 4px;
+      padding: 4px 8px;
+      height: fit-content;
+      white-space: nowrap;
+    }
+
+    .edu-item h3 {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .edu-item .org {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .edu-item ul {
+      list-style: none;
+      font-size: 0.88rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .edu-item li::before {
+      content: '✓ ';
+      color: var(--accent);
+    }
+
+    /* ===== CERTS ===== */
+    .certs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .cert-chip {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px 14px;
+    }
+
+    .cert-chip span {
+      color: var(--muted);
+      font-size: 0.7rem;
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 32px 0 48px;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--accent);
+    }
+  </style>
 </head>
+
 <body>
-    <h1>Hi</h1>
+
+  <nav class="nav">
+    <div class="wrap">
+      <div class="nav-brand">ffm<span class="dot">@</span>secshell</div>
+      <div class="nav-links">
+        <a href="#experience">experience</a>
+        <a href="#projects">projects</a>
+        <a href="#skills">skills</a>
+        <a href="#education">education</a>
+        <a href="#certs">certs</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot"></div>
+          <div class="terminal-dot"></div>
+          <div class="terminal-dot"></div>
+          <span>whoami.sh — fahri@portfolio</span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-line"><span class="prompt">$</span> ./whoami.sh</div>
+          <div class="terminal-output">
+            <h1>Fahri Fadhil Muhammad<span class="cursor"></span></h1>
+            <div class="role">Software Engineer — Cyber Security</div>
+          </div>
+          <div class="terminal-meta">
+            <span>📍 Tangerang Selatan, Indonesia</span>
+            <span>✉ fahrifadhil.m22@gmail.com</span>
+            <span>📞 +62 818 90 2737</span>
+            <a href="https://github.com/FahriFadhil" target="_blank" rel="noopener">github.com/FahriFadhil</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="lede">
+        Cybersecurity student focused on offensive security, secure development, and network
+        architecture. I build and secure web and Android applications with security woven
+        through the SDLC, and put theory to the test through CTF competitions, mobile
+        penetration testing, and real-world vulnerability research.
+      </p>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">12<span class="unit">+</span></div>
+          <div class="stat-label">National CTF comps</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">300<span class="unit">+</span></div>
+          <div class="stat-label">CTF challenges solved</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">40<span class="unit">+</span></div>
+          <div class="stat-label">PortSwigger web labs</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">1<span class="unit">✓</span></div>
+          <div class="stat-label">Play Store bug found</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section id="experience">
+      <div class="section-head">
+        <div class="section-title">experience.log</div>
+        <div class="section-status">status: active</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">01/2026 — <span class="present">present</span></div>
+        <div>
+          <div class="entry-title">Research & Development</div>
+          <div class="entry-org">Binus Cyber Security Community</div>
+          <ul>
+            <li>Contributed to planning and execution of 3+ cybersecurity events, workshops, and competitions</li>
+            <li>Coordinated Capture The Flag competition programs and authored 3+ original problem cases</li>
+            <li>Engaged with a community of 50+ cybersecurity enthusiasts, fostering collaboration and peer learning
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">07/2023 — <span class="present">present</span></div>
+        <div>
+          <div class="entry-title">Marketing — Web Developer Intern</div>
+          <div class="entry-org">PT Inovasi Informatika Indonesia</div>
+          <ul>
+            <li>Rebuilt the i3GIS Transmigrate product website using Elementor/WordPress and managed SEO for improved
+              traffic</li>
+            <li>Built a vulnerability database frontend for i3GIS with React, Tailwind CSS, and Express-consumed APIs
+            </li>
+            <li>Produced marketing content: email campaigns, FAQs, articles, company profile materials, and training
+              support</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">02/2023 — 06/2023</div>
+        <div>
+          <div class="entry-title">Partnership Program</div>
+          <div class="entry-org">Baitul 'Ilmi Educational Institution</div>
+          <ul>
+            <li>Built a full school profile website and management system from scratch</li>
+            <li>Implemented academic info, news/events, and online admission & enrollment flows</li>
+            <li>Created an admin data management dashboard for enrollment, alumni, and news control</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">08/2022</div>
+        <div>
+          <div class="entry-title">Website Development Trainer</div>
+          <div class="entry-org">Insan Mulia Educational Institution</div>
+          <ul>
+            <li>Delivered a web development workshop on HTML, CSS, and JavaScript fundamentals to ~20 high school
+              students</li>
+            <li>Designed a structured, engaging curriculum for first-time learners</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-head">
+        <div class="section-title">projects/</div>
+        <div class="section-status">07/2022 — 06/2023</div>
+      </div>
+
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>TripMate</h3>
+          <p>Travel itinerary planner for organizing trips and schedules.</p>
+          <span class="project-tag">React · TypeScript · Supabase</span>
+        </div>
+        <div class="project-card">
+          <h3>Movie Listing Database</h3>
+          <p>Platform for browsing movie info and building playlists & watchlists.</p>
+          <span class="project-tag">Web App</span>
+        </div>
+        <div class="project-card">
+          <h3>Warehouse Inventory Management</h3>
+          <p>System to track, organize, and manage stock for a warehouse or distribution center.</p>
+          <span class="project-tag">Full Stack</span>
+        </div>
+        <div class="project-card">
+          <h3>Prayer Time Tracker</h3>
+          <p>Helps users manage and stay on top of their daily prayer schedule.</p>
+          <span class="project-tag">Utility</span>
+        </div>
+        <div class="project-card">
+          <h3>To-Do Modern List</h3>
+          <p>Simple, intuitive task manager for organizing daily activities.</p>
+          <span class="project-tag">Productivity</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-head">
+        <div class="section-title">skills.json</div>
+        <div class="section-status amber">confidence levels</div>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Offensive Security</h3>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>Web Penetration Testing</span><span class="tools">BurpSuite · OWASP</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" style="width: 88%"></div>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>Mobile Penetration Testing</span><span class="tools">JADX · Frida</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" style="width: 80%"></div>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>Vulnerability Assessment</span><span class="tools">Threat modeling</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" style="width: 82%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h3>Development</h3>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>Web Development</span><span class="tools">React</span></div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" style="width: 85%"></div>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>Application Development</span><span class="tools">Kotlin / Java</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" style="width: 75%"></div>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>Programming</span><span class="tools">C · Python · Java</span></div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" style="width: 78%"></div>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span>Tooling</span><span class="tools">Github · Docker</span></div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" style="width: 80%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="section-head">
+        <div class="section-title">education/</div>
+        <div class="section-status">timeline</div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-marker">2024–now</div>
+        <div>
+          <h3>Cyber Security — Computer Science</h3>
+          <div class="org">Bina Nusantara University · Part of PETIR (Binus CTF Competitive Group)</div>
+          <ul>
+            <li>12 national CTF competitions, 300+ challenges solved across various platforms</li>
+            <li>40+ web penetration testing labs completed on PortSwigger</li>
+            <li>Penetration testing on a Play Store mobile application (bug found)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-marker">2021–2024</div>
+        <div>
+          <h3>Software Engineering — High School Diploma</h3>
+          <div class="org">IDN Boarding School</div>
+          <ul>
+            <li>Finalist, IT FEST Website Development Competition</li>
+            <li>Public speaking (speech & storytelling) and sports: soccer, basketball, volleyball</li>
+            <li>Attended 5+ public seminars: DevFest 2022 Jakarta, GDG Conference 2022 Jakarta, Droidjam 2022</li>
+            <li>Completed 8+ online courses: IDCAMP Indosat Ooredoo Hutchison 2022, Dicoding, SoloLearn, and more</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="certs">
+      <div class="section-head">
+        <div class="section-title">certificates/</div>
+        <div class="section-status">verified</div>
+      </div>
+
+      <div class="certs">
+        <div class="cert-chip">Full Ethical Hacking Course<span>Udemy · 09/2025 — present</span></div>
+        <div class="cert-chip">The MERN Fullstack: React, NodeJS, Express & MongoDB<span>Udemy · 06/2023 —
+            present</span></div>
+        <div class="cert-chip">Learning Web Programming<span>Dicoding · 06/2022 — 06/2025</span></div>
+        <div class="cert-chip">Learn to Create React Web Application<span>Dicoding · 06/2022 — 06/2025</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      $ contact --email fahrifadhil.m22@gmail.com --github <a href="https://github.com/FahriFadhil" target="_blank"
+        rel="noopener">FahriFadhil</a>
+    </div>
+  </footer>
+
 </body>
+
 </html>
